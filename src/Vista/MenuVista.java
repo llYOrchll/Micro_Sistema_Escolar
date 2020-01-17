@@ -64,6 +64,11 @@ public class MenuVista extends javax.swing.JFrame {
         jPanel2.add(jLabel2, gridBagConstraints);
 
         jButton1.setText("Revisar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -92,6 +97,12 @@ public class MenuVista extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       DespliegueDatosMenuVista menu = new DespliegueDatosMenuVista();
+       menu.setVisible(true);
+       this.dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
