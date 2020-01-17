@@ -5,6 +5,10 @@
  */
 package Test;
 import Vista.InicioVista;
+import CSV.CSVWriter;
+import Modelo.Materia;
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author Javier
@@ -18,6 +22,15 @@ public class NewMain {
         // TODO code application logic here
         InicioVista vista = new InicioVista(); 
         vista.setVisible(true);
+        
+        Materia a = new Materia("4938","DSFT");
+        
+        List<Materia> materias = new ArrayList();
+        
+        materias.add(a);
+        
+        CSVWriter.ExportarCSV(materias);
+        
     }
     
 }

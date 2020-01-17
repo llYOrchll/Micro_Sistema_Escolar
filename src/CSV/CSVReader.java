@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package CSV;
-
+import Modelo.*;
+import java.util.List;
 /**
  *
  * @author Javier
  */
 public class CSVReader {
+    
+    public static void ExportarCSV(List<Alumno> alumnos){
+        
+    }
     
 }
