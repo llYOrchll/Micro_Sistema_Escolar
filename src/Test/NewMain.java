@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Test;
+import CSV.CSVReader;
 import Vista.InicioVista;
 import CSV.CSVWriter;
 import Modelo.Materia;
@@ -23,13 +24,8 @@ public class NewMain {
         InicioVista vista = new InicioVista(); 
         vista.setVisible(true);
         
-        Materia a = new Materia("4938","DSFT");
         
-        List<Materia> materias = new ArrayList();
         
-        materias.add(a);
-        
-        CSVWriter.ExportarCSV(materias);
         
     }
     

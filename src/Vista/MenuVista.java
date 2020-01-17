@@ -77,6 +77,11 @@ public class MenuVista extends javax.swing.JFrame {
         jPanel2.add(jButton1, gridBagConstraints);
 
         jButton2.setText("Cargar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -103,6 +108,13 @@ public class MenuVista extends javax.swing.JFrame {
        menu.setVisible(true);
        this.dispose();
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        // TODO add your handling code here:
+        CargaMateriasVista cmV = new CargaMateriasVista();
+        cmV.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton2MouseClicked
 
     /**
      * @param args the command line arguments

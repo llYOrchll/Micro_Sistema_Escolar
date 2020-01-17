@@ -4,19 +4,60 @@
  * and open the template in the editor.
  */
 package Vista;
+import Modelo.Asignatura;
+//import CSV.CSVReader();
+
+import CSV.CSVReader;
+import Modelo.Asignatura;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
  * @author Javier
  */
 public class DatosAsignaturasVista extends javax.swing.JFrame {
-
+    DefaultTableModel modelo = new DefaultTableModel();
+    
+    public void CargaAutomatica(){
+        
+        List<Asignatura> asignaturas = new ArrayList<Asignatura>();
+        asignaturas = CSVReader.ImportarCSV();
+      
+        modelo.addColumn("Clave");
+        modelo.addColumn("Licenciatura");
+        modelo.addColumn("Nombre");
+        
+        this.jTable1.setModel(modelo);
+        
+        String datos[][] = new String[asignaturas.size()][3];
+        
+        for(int i=0;i< asignaturas.size();i++)
+        {
+            datos[i][0] = asignaturas.get(i).getClave();
+            datos[i][1] = asignaturas.get(i).getLicenciatura();
+            datos[i][2] = asignaturas.get(i).getNombreAsignatura();
+        }
+        
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            datos,
+            new String [] {
+                "Clave", "Licenciatura", "Asignatura"
+            }
+        ));  
+    }
     /**
      * Creates new form DatosAsignaturasVista
      */
     public DatosAsignaturasVista() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        CargaAutomatica();
+        
     }
 
     /**
@@ -38,20 +79,40 @@ public class DatosAsignaturasVista extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Clave", "Licenciatura", "Asignatura"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+        }
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setText("ASIGNATURAS");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Regresar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
