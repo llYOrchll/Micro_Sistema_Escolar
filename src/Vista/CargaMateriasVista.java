@@ -5,10 +5,11 @@
  */
 package Vista;
 import CSV.CSVWriter;
-import Modelo.Asignatura;
-import Modelo.Materia;
+import Modelo.*;
+import CSV.CSVReader;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -16,12 +17,32 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CargaMateriasVista extends javax.swing.JFrame {
     
-    /**
-     * Creates new form CargaMateriasVista
-     */
+    public void CargaComboBox(){  
+         List<Asignatura> asignaturas = new ArrayList<Asignatura>();
+         List<Maestro> maestros = new ArrayList<Maestro>();
+         
+         asignaturas = CSVReader.ImportarAsignaturaCSV();
+         maestros = CSVReader.ImportarMaestroCSV();
+         
+         String[] clavesA= new String[asignaturas.size()];  
+         String[] clavesM= new String[maestros.size()];
+         
+         for(int i=0;i< asignaturas.size();i++)
+        {
+            clavesA[i] = asignaturas.get(i).getClave();
+            clavesM[i] = maestros.get(i).getClave();
+        }
+ 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(clavesA));      
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(clavesM));
+                                      
+    }
+    
     public CargaMateriasVista() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        CargaComboBox();
         
         
         
@@ -45,14 +66,11 @@ public class CargaMateriasVista extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
         });
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton1.setText("Cargar");
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -131,6 +149,18 @@ public class CargaMateriasVista extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         List<Materia> materias = new ArrayList();
+        materias = CSVReader.ImportarMateriasCSV();
+        String d1;
+        String d2;
+        
+        
+        d1 = (String) jComboBox1.getSelectedItem();
+        d2 = (String) jComboBox2.getSelectedItem();
+        
+        Materia registro = new Materia(d1,d2);
+        
+        materias.add(registro);
+        
         CSVWriter.ExportarCSV(materias);
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -178,3 +208,5 @@ public class CargaMateriasVista extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }
+
+

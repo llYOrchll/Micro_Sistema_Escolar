@@ -5,18 +5,52 @@
  */
 package Vista;
 
+import CSV.CSVReader;
+import Modelo.Alumno;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Javier
  */
 public class DatosAlumnosVista extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DatosAlumnosVista
-     */
+    DefaultTableModel modelo = new DefaultTableModel();
+    
+    public void CargaAutomatica(){
+        
+        List<Alumno> alumnos = new ArrayList<Alumno>();
+        alumnos = CSVReader.ImportarAlumnoCSV();
+      
+        modelo.addColumn("Clave");
+        modelo.addColumn("Licenciatura");
+        modelo.addColumn("Nombre");
+        
+        this.jTable1.setModel(modelo);
+        
+        String datos[][] = new String[alumnos.size()][3];
+        
+        for(int i=0;i< alumnos.size();i++)
+        {
+            datos[i][0] = alumnos.get(i).getMatricula();
+            datos[i][1] = alumnos.get(i).getNombreAlumno();
+            datos[i][2] = alumnos.get(i).getApellidoAlumno();
+        }
+        
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            datos,
+            new String [] {
+                "Matricula", "Nombre", "Apellido"
+            }
+        ));  
+    }
+    
+    
     public DatosAlumnosVista() {
         initComponents();
         this.setLocationRelativeTo(null);
+        CargaAutomatica();
     }
 
     /**

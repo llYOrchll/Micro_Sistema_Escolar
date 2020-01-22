@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class CSVReader {
     
-    public static List<Asignatura> ImportarCSV(){
+    public static List<Asignatura> ImportarAsignaturaCSV(){
         List<Asignatura> asignaturas = new ArrayList();
         try{
             
@@ -33,19 +33,90 @@ public class CSVReader {
                 asignaturas.add(new Asignatura(clave,licenciatura,nombreAsignatura));                
             }
             
-            leerAsignaturas.close(); // Cierra el archivo
-            
-            // Recorremos la lista y la mostramos en la pantalla
-//            for(Asignatura asignatura : asignaturas) {
-//                System.out.println(asignatura.getClave() + " , "+ asignatura.getLicenciatura() + " , "+asignatura.getNombreAsignatura());
-//            }
-            
+            leerAsignaturas.close(); // Cierra el archivo            
         } catch(FileNotFoundException e) {
             e.printStackTrace();
         } catch(IOException e) {
             e.printStackTrace();
         }
         return asignaturas;
+    }
+    
+    public static List<Alumno> ImportarAlumnoCSV(){
+        List<Alumno> alumnos = new ArrayList();
+        try{
+            
+            
+            CsvReader leerAlumnos = new CsvReader("Alumnos.csv");
+            leerAlumnos.readHeaders();
+            
+            
+            while(leerAlumnos.readRecord()) {
+                String matricula = leerAlumnos.get(0);
+                String nombre = leerAlumnos.get(1);
+                String apellido = leerAlumnos.get(2);
+                
+                alumnos.add(new Alumno(matricula,nombre,apellido));                
+            }
+            
+            leerAlumnos.close(); // Cierra el archivo            
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return alumnos;
+    }
+    
+    public static List<Maestro> ImportarMaestroCSV(){
+        List<Maestro> maestros = new ArrayList();
+        try{
+            
+            
+            CsvReader leerMaestros = new CsvReader("Maestros.csv");
+            leerMaestros.readHeaders();
+            
+            
+            while(leerMaestros.readRecord()) {
+                String claveM = leerMaestros.get(0);
+                String nombreM = leerMaestros.get(1);
+                String apellidoM = leerMaestros.get(2);
+                
+                maestros.add(new Maestro(claveM,nombreM,apellidoM));                
+            }
+            
+            leerMaestros.close(); // Cierra el archivo            
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return maestros;
+    }
+    
+    public static List<Materia> ImportarMateriasCSV(){
+        List<Materia> materias = new ArrayList();
+        try{
+            
+            
+            CsvReader leerMaterias = new CsvReader("CargaMaterias.csv");
+            leerMaterias.readHeaders();
+            
+            
+            while(leerMaterias.readRecord()) {
+                String claveA = leerMaterias.get(0);
+                String claveM = leerMaterias.get(1);
+                
+                materias.add(new Materia(claveA,claveM));                
+            }
+            
+            leerMaterias.close(); // Cierra el archivo            
+        } catch(FileNotFoundException e) {
+            e.printStackTrace();
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return materias;
     }
     
 }

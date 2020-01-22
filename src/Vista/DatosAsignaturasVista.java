@@ -8,10 +8,8 @@ import Modelo.Asignatura;
 //import CSV.CSVReader();
 
 import CSV.CSVReader;
-import Modelo.Asignatura;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -25,7 +23,7 @@ public class DatosAsignaturasVista extends javax.swing.JFrame {
     public void CargaAutomatica(){
         
         List<Asignatura> asignaturas = new ArrayList<Asignatura>();
-        asignaturas = CSVReader.ImportarCSV();
+        asignaturas = CSVReader.ImportarAsignaturaCSV();
       
         modelo.addColumn("Clave");
         modelo.addColumn("Licenciatura");
@@ -160,8 +158,8 @@ public class DatosAsignaturasVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        MenuVista menuP = new MenuVista();
-        menuP.setVisible(true);
+        DespliegueDatosMenuVista menuDV = new DespliegueDatosMenuVista();
+        menuDV.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 

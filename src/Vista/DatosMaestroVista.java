@@ -5,18 +5,53 @@
  */
 package Vista;
 
+import CSV.CSVReader;
+import Modelo.Maestro;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Javier
  */
 public class DatosMaestroVista extends javax.swing.JFrame {
-
-    /**
-     * Creates new form DatosMaestroVista
-     */
+    DefaultTableModel modelo = new DefaultTableModel();
+    
+    public void CargaAutomatica(){
+        
+        List<Maestro> maestros = new ArrayList<Maestro>();
+        maestros = CSVReader.ImportarMaestroCSV();
+      
+        modelo.addColumn("Clave");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        
+        this.jTable1.setModel(modelo);
+        
+        String datos[][] = new String[maestros.size()][3];
+        
+        for(int i=0;i< maestros.size();i++)
+        {
+            datos[i][0] = maestros.get(i).getClave();
+            datos[i][1] = maestros.get(i).getNombreMaestro();
+            datos[i][2] = maestros.get(i).getApellidoMaestro();
+        }
+        
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            datos,
+            new String [] {
+                "Matricula", "Nombre", "Apellido"
+            }
+        ));  
+    }
+    
+    
     public DatosMaestroVista() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
+        CargaAutomatica();
     }
 
     /**
@@ -98,8 +133,8 @@ public class DatosMaestroVista extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        MenuVista menuP = new MenuVista();
-        menuP.setVisible(true);
+        DespliegueDatosMenuVista menuDV = new DespliegueDatosMenuVista();
+        menuDV.setVisible(true);
         this.dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton1MouseClicked
 
